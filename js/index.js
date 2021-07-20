@@ -3,7 +3,7 @@ jQuery(function( $ ) {
 	JXG.Options.board.minimizeReflow='none'		
 
 	var board = JXG.JSXGraph.initBoard('edvi',{
-			boundingbox:[-10,60,10,-15], //xmin,ymax,xmax,ymin
+			boundingbox:[-20,55,10,-15], //xmin,ymax,xmax,ymin
 			keepaspectratio:true, 
 			axis:false,			
 			showCopyright:false,
@@ -28,20 +28,22 @@ jQuery(function( $ ) {
 
 		//-----------------------------Dibuja ejes y fondo----------------------//
  
+		var ejeX = board.create('axis', [[0,0], [1,0]],{
+
+			ticks: {
+				drawZero:true,
+				ticksDistance:2,
+				majorHeight:10,								
+				label: {offset:[-5,-15]} 
+			}
+
+		});
+
 		var backgroundUrl= "images/background_long.png";
  		var backgroundImg=board.create('image',[backgroundUrl,[-20,-33.5],[120,191]],{fixed:true, needsRegularUpdate: false, highlight:'false'}); 		
- 		var campUrl= "images/treeHouse.png";
- 		var campImg=board.create('image',[campUrl,[50,0],[10,10]],{fixed:true,needsRegularUpdate: false, highlight: 'false'});
-
- 		var x1 = board.create('point', [0, -1.0], {fixed:true, name:'', face: '<', strokeColor: 'black',highlight: 'false'});
-  		var x2 = board.create('point', [49, -1.0],{fixed:true, name:'', face: '>', strokeColor: 'black',highlight: 'false'});
- 		board.create('segment', [x1, x2], {strokeColor: 'black',strokeWidth:2, dash:1});
- 		board.create('text',[25, -5,"50 m"]);
-
- 		var y1 = board.create('point', [-1, 1], {fixed:true, name:'', face: 'v', strokeColor: 'black',highlight: 'false'});
-  		var y2 = board.create('point', [-1, 29],{fixed:true, name:'', face: '^', strokeColor: 'black',highlight: 'false'});
- 		board.create('segment', [y1, y2], {strokeColor: 'black',strokeWidth:2, dash:1});
- 		board.create('text',[-6, 15,"30 m"]);
+ 		var posteUrl= "images/poste.gif";
+ 		var posteImg=board.create('image',[posteUrl,[50,0],[3,30]],{fixed:true,needsRegularUpdate: false, highlight: 'false'});
+ 		
 
 		//------------------------Variables Animacion----------------//
 		var resolucion=0.001; 
@@ -50,12 +52,9 @@ jQuery(function( $ ) {
 		var t0;
 		var dt;
 		
-		//------------------------Variables de la tabla--------------//
-		var dataX=[];
-		var dataY=[];
 		//------------------------Variables Escenario----------------//
 		
-		var pos0=new Vector2D(0,30);
+		var pos0=new Vector2D(0,0);
 		var pos1=new Vector2D(0,10);		
 		var velo0= new Vector2D(25,0);		
 		var g=9.8;
@@ -76,13 +75,12 @@ jQuery(function( $ ) {
 		
 		var particle=board.create('point',[function(){return ball.x},function(){
 			return ball.y;			
-			}],{name:'', visible:false});		
+			}],{name:'', visible:true});		
 
-		var urlHelicopter= "images/helicopter.png";
- 		var urlCrane= "images/crane.png";
+		var urlCar= "images/car1.gif";
+ 		var urlCrane= "images/car2.gif";
 
- 		var helicopterImg=board.create('image',[urlHelicopter,[function(){return ball.x-5.55},function() {return pos0.y+2.25;}],[10,7.5]],{fixed:true, highlight: 'false'});		
- 		var craneImg=board.create('image',[urlCrane,[function(){return ball.x-2.25},function() {return ball.y}],[2.25,2.25]],{fixed:true, highlight: 'false'}); 				
+ 		var carImg=board.create('image',[urlCar,[function(){return ball.x-15.5},function() {return pos0.y;}],[16,7]],{fixed:true, highlight: 'false'});		 		
 		
 		//-------------------------Animación--------------------------//
 		function play(){
