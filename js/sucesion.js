@@ -87,6 +87,23 @@ jQuery(function( $ ) {
 
 		});
 
+		//---------------------------Dibuja rectángulo épsilon--------------------//
+		
+		var p3_eps=board.create('point',[30,1-epsilon],{
+			name:''
+		});
+		var p4_eps=board.create('point',[30,1+epsilon],{
+			name:''
+		});
+
+
+		var poly = board.create('polygon',[p1_eps,p2_eps,p4_eps,p3_eps], { 
+			borders:{strokeColor:'black',
+					dash:2,
+					},
+			fillOpacity:0.05,
+			fillColor:"blue",
+		});
 
 
 
@@ -106,16 +123,7 @@ jQuery(function( $ ) {
 
 
 
-/* 		for (let i = 0; i < 20; i++) { 
 
-			board.create('point',[i,function(x){
- 				return i*i;
- 			}]);
- 			
- 			board.update();
-
-  			
-		}*/
 
 
 
