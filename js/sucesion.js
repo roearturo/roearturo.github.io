@@ -110,7 +110,7 @@ jQuery(function( $ ) {
  		
 		function play(){                                         //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
  		(async () => {
-  				for(let i = 1; i < 10; i++) {
+  				for(let i = 1; i < 18; i++) {
     			await new Promise(resolve => setTimeout(() => {
       			board.create('point',[i,function(x){
  				return i/(i+1);}], {name:''});
