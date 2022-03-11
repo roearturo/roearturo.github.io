@@ -74,10 +74,12 @@ jQuery(function( $ ) {
 		var epsilon=0.5
 
 		var p1_eps=board.create('point',[0,1-epsilon],{
-			name:''
+			name:'',
+			fixed:true,
 		});
 		var p2_eps=board.create('point',[0,1+epsilon],{
-			name:''
+			name:'',
+			fixed:true,
 		});
 
 		var recta1 = board.create('line',[p1_eps,p2_eps], {
@@ -90,10 +92,12 @@ jQuery(function( $ ) {
 		//---------------------------Dibuja rectángulo épsilon--------------------//
 		
 		var p3_eps=board.create('point',[30,1-epsilon],{
-			name:''
+			name:'',
+			fixed:true,
 		});
 		var p4_eps=board.create('point',[30,1+epsilon],{
-			name:''
+			name:'',
+			fixed:true,
 		});
 
 
