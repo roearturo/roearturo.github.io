@@ -71,7 +71,7 @@ jQuery(function( $ ) {
 
 		//---------------------------Dibuja rectas épsilon--------------------//
 
-		var epsilon=0.5
+/*		var epsilon=0.5
 
 		var p1_eps=board.create('point',[0,1-epsilon],{
 			name:'',
@@ -87,18 +87,42 @@ jQuery(function( $ ) {
 			straightLast:false, 
 			strokeWidth:4,
 
+		});*/
+
+		var epsilon=0.5
+
+		var p1_eps=board.create('point',[0,1],{
+			name:'',
+			fixed:true,
+		});
+		var p2_eps=board.create('point',[0,1],{
+			name:'',
+			fixed:true,
+		});
+
+		var recta1 = board.create('line',[p1_eps,p2_eps], {
+			straightFirst:false, 
+			straightLast:false, 
+			strokeWidth:4,
+
 		});
 
 		//---------------------------Dibuja rectángulo épsilon--------------------//
 		
-		var p3_eps=board.create('point',[30,1-epsilon],{
+		var p3_eps=board.create('point',[30,1],{
 			name:'',
 			fixed:true,
 		});
-		var p4_eps=board.create('point',[30,1+epsilon],{
+		var p4_eps=board.create('point',[30,1],{
 			name:'',
 			fixed:true,
 		});
+
+		p1_eps.moveTo([0,1+epsilon],1000);
+		p2_eps.moveTo([0,1-epsilon],1000);
+		p3_eps.moveTo([30,1+epsilon],1000);
+		p4_eps.moveTo([30,1-epsilon],1000);
+
 
 
 		var poly = board.create('polygon',[p1_eps,p2_eps,p4_eps,p3_eps], { 
