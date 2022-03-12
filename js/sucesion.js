@@ -89,12 +89,14 @@ jQuery(function( $ ) {
 
 		});*/
 
-		var epsilon=0.5
+		let epsilon=0
+		let limite=1
 
 		var p1_eps=board.create('point',[0,1],{
 			name:'',
 			fixed:true,
 		});
+		
 		var p2_eps=board.create('point',[0,1],{
 			name:'',
 			fixed:true,
@@ -107,7 +109,7 @@ jQuery(function( $ ) {
 
 		});
 
-		//---------------------------Dibuja rectángulo épsilon--------------------//
+		//---------------------------Dibuja rectángulo --------------------//
 		
 		var p3_eps=board.create('point',[30,1],{
 			name:'',
@@ -117,13 +119,7 @@ jQuery(function( $ ) {
 			name:'',
 			fixed:true,
 		});
-
-		p1_eps.moveTo([0,1+epsilon],1000);
-		p2_eps.moveTo([0,1-epsilon],1000);
-		p3_eps.moveTo([30,1+epsilon],1000);
-		p4_eps.moveTo([30,1-epsilon],1000);
-
-
+		
 
 		var poly = board.create('polygon',[p1_eps,p2_eps,p4_eps,p3_eps], { 
 			borders:{strokeColor:'black',
@@ -133,8 +129,9 @@ jQuery(function( $ ) {
 			fillColor:"blue",
 		});
 
+		animaRegion()
 
-
+		//--------------------------Anima la sucesión---------------------//
  		
 		function play(){                                         //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
  		(async () => {
@@ -148,8 +145,16 @@ jQuery(function( $ ) {
 		})();	
 		}
 
+		//-------------------------Anima la región-------------------//
 
-
+		function animaRegion(){	
+			incX=parseFloat(limite)+parseFloat(epsilon);
+			decX=parseFloat(limite)-parseFloat(epsilon);					
+			p1_eps.moveTo([0,incX],250);
+			p2_eps.moveTo([0,decX],250);
+			p3_eps.moveTo([30,incX],250);
+			p4_eps.moveTo([30,decX],250);	
+		}
 
 
 
@@ -168,29 +173,20 @@ jQuery(function( $ ) {
 			board.update();		
 		});	
 		
-		$('#SendBtn').click(function() {									
-			
-		});	
+
 
 		
-		//------------Recupera el valor de los sliders------------------//
-		
-		$("#sliderH").bind( "change", function(event, ui) {  		  		
-						
-			$("#spanH").text("Height: " + $(this).val());
-		
-			board.update();			
+		//------------Recupera el valor de los inputs------------------//
+		$( "#inputEpsilon" ).change(function() {
+  			epsilon=$(this).val();  			
+  			animaRegion();
+  			
+  			$("#Formula_1").text("Hello world!");
+
+
 		});
 
-		$("#sliderG").bind( "change", function(event, ui) {  		  		
-		
-			board.update();	
-		});
 
-		$("#sliderV").bind( "change", function(event, ui) {  		  		
-									
-			board.update();		
-		});
 
 		$("#sliderD").bind( "change", function(event, ui) {  		  		
 		
