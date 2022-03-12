@@ -181,7 +181,10 @@ jQuery(function( $ ) {
   			epsilon=$(this).val();  			
   			animaRegion();
   			
-  			$("#Formula_1").text("Hello world!");
+  			$("#Formula_1").text("        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  			MathJax.typeset()
+
+  			//\frac{n}{n+1}-1 \right|\lt e \Leftrightarrow
 
 
 		});
