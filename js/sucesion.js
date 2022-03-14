@@ -136,14 +136,14 @@ jQuery(function( $ ) {
 
 		//--------------------------Anima la sucesión---------------------//
  		
-		function play(){                                         //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
+		function animaSucesion(){                                         //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
  		(async () => {
   				for(let i = 1; i < 18; i++) {
     			await new Promise(resolve => setTimeout(() => {
       			board.create('point',[i,function(x){
  				return i/(i+1);}], {name:''});
       			resolve();
-    			}, 100));
+    			}, 400));
   			}
 		})();	
 		}
@@ -169,7 +169,7 @@ jQuery(function( $ ) {
 		//---------------------Botones-----------------------------------//
 		
 		$('#PlayBtn').click(function() {											
-			play();				
+			animaSucesion();				
 		});
 
 		$('#ResetBtn').click(function() {											
@@ -182,25 +182,52 @@ jQuery(function( $ ) {
 		//------------Recupera el valor de los inputs------------------//
 		$( "#inputEpsilon" ).change(function() {
   			epsilon=$(this).val();  			
+  			animaSucesion();
   			animaRegion();
-  			console.log(estaDesarrollo);
-  			if(!estaDesarrollo){
+  			
+  			$("#Paso_1").text(" Dada, \\( \\varepsilon    \\) = " +epsilon+ " existe n \\( \\in  \\mathrm{I}\\!\\mathrm{N} \\) tal que para toda,    \\( n \\gt N     \\) se satisface que, ");  			
+  			$("#Paso_2").text(" \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  			$("#Paso_3").text(" \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);
+
+  			const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
+  			const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
+  			$("#Paso_3").append(etiqueta+input);	
+
+  			MathJax.typeset()
+  			
+  			if(!estaDesarrollo){  								
+				estaDesarrollo=true;
+  				MathJax.typeset()
+  			}
+
+
+/*  			if(!estaDesarrollo){
   				const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
   				const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
-  				$("#Desarrollo").text(" Desarrollo");  			
-  				$("#Paso_1").text(" La desigualdad,        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
-  				$("#Paso_2").text(" Se simplifica como,    \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);  		// 		
+  				//$("#Desarrollo").text(" Desarrollo");  			
+  				$("#Paso_1").text(" Dada, \\( \\varepsilon    \\) = " +epsilon+ " existe N \\( \\in  \\mathrm{I}\\!\\mathrm{N} \\) tal que para toda,    \\( n \\gt N     \\) se satisface que, ");  			
+  				//$("#Paso_1").text(" La desigualdad,        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  				//$("#Paso_2").text(" Se simplifica como,    \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);  		// 		
+				//$("#Paso_2").text(" para toda,    \\( n \\gt N     \\) se satisface que, ");  		// 		
 				$("#Completa").text(" Completa la expresión: ");
 				$("#Paso_3").append(etiqueta+input);
 				estaDesarrollo=true;
   				MathJax.typeset()
-  			}
+  			}*/
+
+
+
 		});
 
 		
   		$(document).on('change','#inputVerificaEpsilon',function(){	 //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
   			if(!estaCalcula){
   				$("#Paso_4").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
+  				const lblInputN="<div class=\"form-group row\"\> \<label for=\"inputN\" class=\"col-6 col-form-label text-right\" >  N \\(    \\gt \\) \</label> ";
+  				const inputN="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputN\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
+  				$("#Paso_5").append(lblInputN+inputN);
+  				estaCalcula=true;
+
   				MathJax.typeset()
   			}       		
 
