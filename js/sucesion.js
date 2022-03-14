@@ -89,8 +89,11 @@ jQuery(function( $ ) {
 
 		});*/
 
-		let epsilon=0
-		let limite=1
+		var epsilon=0
+		var limite=1
+
+		var estaDesarrollo = false;
+		var estaCalcula=false;
 
 		var p1_eps=board.create('point',[0,1],{
 			name:'',
@@ -180,25 +183,28 @@ jQuery(function( $ ) {
 		$( "#inputEpsilon" ).change(function() {
   			epsilon=$(this).val();  			
   			animaRegion();
-  			
-  			const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
-  			const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
-  			$("#Desarrollo").text(" Desarrollo");  			
-  			$("#Paso_1").text(" La desigualdad,        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
-  			$("#Paso_2").text(" Se simplifica como,    \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);  		// 		
-			$("#Completa").text(" Completa la expresión: ");
-			$("#Paso_3").append(etiqueta+input);
-			
-  			MathJax.typeset()
-
+  			console.log(estaDesarrollo);
+  			if(!estaDesarrollo){
+  				const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
+  				const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
+  				$("#Desarrollo").text(" Desarrollo");  			
+  				$("#Paso_1").text(" La desigualdad,        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  				$("#Paso_2").text(" Se simplifica como,    \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);  		// 		
+				$("#Completa").text(" Completa la expresión: ");
+				$("#Paso_3").append(etiqueta+input);
+				estaDesarrollo=true;
+  				MathJax.typeset()
+  			}
 		});
 
 		
-  		$(document).on('change','#inputVerificaEpsilon',function(){	 								//https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
-  			   
-       		$("#Paso_4").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
-  			MathJax.typeset()
-			});    
+  		$(document).on('change','#inputVerificaEpsilon',function(){	 //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
+  			if(!estaCalcula){
+  				$("#Paso_4").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
+  				MathJax.typeset()
+  			}       		
+
+		});    
 
   			
 
