@@ -181,13 +181,28 @@ jQuery(function( $ ) {
   			epsilon=$(this).val();  			
   			animaRegion();
   			
-  			$("#Formula_1").text("        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  			const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
+  			const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
+  			$("#Desarrollo").text(" Desarrollo");  			
+  			$("#Paso_1").text(" La desigualdad,        \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  			$("#Paso_2").text(" Se simplifica como,    \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);  		// 		
+			$("#Completa").text(" Completa la expresión: ");
+			$("#Paso_3").append(etiqueta+input);
+			
   			MathJax.typeset()
 
-  			//\frac{n}{n+1}-1 \right|\lt e \Leftrightarrow
-
-
 		});
+
+		
+  		$(document).on('change','#inputVerificaEpsilon',function(){	 								//https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
+  			   
+       		$("#Paso_4").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
+  			MathJax.typeset()
+			});    
+
+  			
+
+		
 
 
 
