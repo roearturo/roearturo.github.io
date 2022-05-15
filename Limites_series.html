@@ -12,10 +12,7 @@
   <script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css">
   <!--Mis js-->
-  <script src="js/particle.js"></script>
-  <script src="js/vector2D.js"></script>
-  <script src="js/ball.js"></script>
-  <script type="text/javascript" language="javascript" src="js/sucesion.js"></script>
+  <script type="text/javascript" language="javascript" src="js/serie.js"></script>
   <!--MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -72,54 +69,44 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <form id="myForm" class="">
-                        <div class="form-group row"> <label for="inputEpsilon" class="col-2 col-form-label">\( \varepsilon: \)</label>
+                      <form id="c_form-h" class="">
+                        <div class="form-group row"> <label for="inputEpsilon" class="col-2 col-form-label">\( \varepsilon : \)</label>
                           <div class="col-10">
                             <input type="number" class="form-control w-50" id="inputEpsilon" value="0" max="3" min="0" step="0.1"> </div>
                         </div>
-
-
-                        <div class="row pr-1 text-center">
-                          <div class="col-md-12">
-                            <!--––<h5 id="Desarrollo" class="text-left"-->
-                            <p id="Paso_1" class="text-left"> </p>
-                            <p id="Paso_2" class="text-center"> </p>
-                          </div>
-                        </div>
-                        <div class="row pr-1 text-center">
-                          <div class="col-md-12">
-                            <h5 id="Completa" class="text-left"> </h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p id="Paso_3" class="text-center">
-                            </p>
-                          </div>
-                        </div>
-                        <div class="row pr-1 text-center">
-                          <div class="col-md-12">
-                            <h5 class="text-left" id="Calcula"></h5>
-                            <p id="Paso_4" class="text-left"> </p>
-                          </div>
-                        </div>
-                        <div class="row pr-1 text-center">
-                          <div class="col-md-12">
-                            <h5 class="text-left" id="Calcula"></h5>
-                            <p id="Paso_5" class="text-left"> </p>
-                          </div>
-                        </div>
-                        <div class="row pr-1 text-center">
-                          <div class="col-md-12">
-                            <h5 class="text-left" id="Calcula"></h5>
-                            <p id="Paso_6" class="text-left"> </p>
-                          </div>
-                        </div>                        
                       </form>
-                      
                     </div>
                   </div>
-
+                  <div class="row pr-1 text-center">
+                    <div class="col-md-12">
+                      <!--––<h5 id="Desarrollo" class="text-left"-->
+                      <p id="Paso_1" class="text-left"> </p>
+                      <p id="Paso_2" class="text-center"> </p>
+                    </div>
+                  </div>
+                  <div class="row pr-1 text-center">
+                    <div class="col-md-12">
+                      <h5 id="Completa" class="text-left"> </h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form id="Paso_3" class="">
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row pr-1 text-center">
+                    <div class="col-md-12">
+                      <h5 class="text-left" id="Calcula"></h5>
+                      <p id="Paso_4" class="text-left"> </p>
+                    </div>
+                  </div>
+                  <div class="row pr-1 text-center">
+                    <div class="col-md-12">
+                      <h5 class="text-left" id="Calcula"></h5>
+                      <p id="Paso_5" class="text-left"> </p>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-8">
                   <div id="edvi" style="width:650px; height:400px;display:block;margin-left:auto;margin-right:auto;">
@@ -127,7 +114,7 @@
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
-                 <!--  <button id="PlayBtn" type="button" class="btn btn-success" style="width:600px;display:block;margin-left:auto;margin-right:auto;">Ejecutar</button> -->
+                  <button id="PlayBtn" type="button" class="btn btn-success" style="width:600px;display:block;margin-left:auto;margin-right:auto;">Ejecutar</button>
                 </div>
               </div>
             </div>

@@ -98,17 +98,32 @@ jQuery(function( $ ) {
 		var p1_eps=board.create('point',[0,1],{
 			name:'',
 			fixed:true,
+			fillColor:"blue"
 		});
 		
 		var p2_eps=board.create('point',[0,1],{
 			name:'',
 			fixed:true,
+			fillColor:"blue"
+		});
+
+		var p1_eps_white=board.create('point',[0,1],{
+			name:'',
+			fixed:true,
+			fillColor:"white"
+		});
+		
+		var p2_eps_white=board.create('point',[0,1],{
+			name:'',
+			fixed:true,
+			fillColor:"white"
 		});
 
 		var recta1 = board.create('line',[p1_eps,p2_eps], {
 			straightFirst:false, 
 			straightLast:false, 
 			strokeWidth:4,
+
 
 		});
 
@@ -134,6 +149,30 @@ jQuery(function( $ ) {
 
 		animaRegion()
 
+		//----------------------------Dibuja franja------------------------//
+
+		var p1_eps_line=board.create('point',[0,0],{
+				name:'',
+				fixed:true,
+				fillColor:"blue",
+				visible:false
+			});
+		
+			var p2_eps_line=board.create('point',[0,50],{
+				name:'',
+				fixed:true,
+				fillColor:"blue",
+				visible:false
+
+			});
+			
+			var recta1 = board.create('line',[p1_eps_line,p2_eps_line], {
+				straightFirst:false, 
+				straightLast:false, 
+				strokeWidth:4,
+				visible:true
+			});
+
 		//--------------------------Anima la sucesión---------------------//
  		
 		function animaSucesion(){                                         //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
@@ -155,25 +194,21 @@ jQuery(function( $ ) {
 			decX=parseFloat(limite)-parseFloat(epsilon);					
 			p1_eps.moveTo([0,incX],250);
 			p2_eps.moveTo([0,decX],250);
+			p1_eps_white.moveTo([0,incX],250);
+			p2_eps_white.moveTo([0,decX],250);
 			p3_eps.moveTo([30,incX],250);
 			p4_eps.moveTo([30,decX],250);	
 		}
 
 
-
-
-
-
-
-
 		//---------------------Botones-----------------------------------//
 		
 		$('#PlayBtn').click(function() {											
-			animaSucesion();				
+			//animaSucesion();				
 		});
 
 		$('#ResetBtn').click(function() {											
-			board.update();		
+			//board.update();		
 		});	
 		
 
@@ -181,24 +216,7 @@ jQuery(function( $ ) {
 		
 		//------------Recupera el valor de los inputs------------------//
 		$( "#inputEpsilon" ).change(function() {
-  			epsilon=$(this).val();  			
-  			animaSucesion();
-  			animaRegion();
-  			
-  			$("#Paso_1").text(" Dada, \\( \\varepsilon    \\) = " +epsilon+ " existe n \\( \\in  \\mathrm{I}\\!\\mathrm{N} \\) tal que para toda,    \\( n \\gt N     \\) se satisface que, ");  			
-  			$("#Paso_2").text(" \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
-  			$("#Paso_3").text(" \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);
-
-  			const etiqueta="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
-  			const input="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
-  			$("#Paso_3").append(etiqueta+input);	
-
-  			MathJax.typeset()
-  			
-  			if(!estaDesarrollo){  								
-				estaDesarrollo=true;
-  				MathJax.typeset()
-  			}
+  			cambiaEpsilon($(this).val());
 
 
 /*  			if(!estaDesarrollo){
@@ -219,35 +237,77 @@ jQuery(function( $ ) {
 
 		});
 
-		
-  		$(document).on('change','#inputVerificaEpsilon',function(){	 //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
-  			if(!estaCalcula){
-  				$("#Paso_4").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
-  				const lblInputN="<div class=\"form-group row\"\> \<label for=\"inputN\" class=\"col-6 col-form-label text-right\" >  N \\(    \\gt \\) \</label> ";
-  				const inputN="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputN\" value=\"0\" max=\"3\" min=\"0\" step=\"0.1\">    <\/div>"
-  				$("#Paso_5").append(lblInputN+inputN);
-  				estaCalcula=true;
 
+
+		function cambiaEpsilon(valor) {
+			epsilon=valor
+  			animaSucesion();
+  			animaRegion();
+  			
+  			if(!estaDesarrollo){
+  				$("#Paso_1").text(" Dada, \\( \\varepsilon    \\) = " +epsilon+ " existe n \\( \\in  \\mathrm{I}\\!\\mathrm{N} \\) tal que para toda,    \\( n \\gt N     \\) se satisface que, ");  			
+  				$("#Paso_2").text(" \\( \\vert  \\frac{n}{n+1}-1  \\vert   \\lt     \\) " + epsilon);  			
+  				$("#Paso_3").text(" \\( \\vert  \\frac{-1}{n+1}  \\vert   \\lt     \\) " + epsilon);
+
+  				const lblInputEps="<div class=\"form-group row\"\> \<label for=\"inputEpsilon\" class=\"col-6 col-form-label text-right\" >  \\( \\vert  \\frac{1}{n+1}  \\vert   \\lt \\) \</label> ";
+  				const inputEps="\<input type=\"text\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" placeholder=\"\">    <\/div>"
+  				const btnVerifica="\<button type=\"button\" class=\"btn btn-success\" id=\"btnVerifica\" style=\"width:100px;display:block;margin-left:auto;margin-right:auto;\"> Verificar  <\/button>"
+  						
+  				$("#Paso_4").append(lblInputEps+inputEps+btnVerifica);	
+
+  				MathJax.typeset()
+
+  				if(!estaDesarrollo){  								
+					estaDesarrollo=true;
+  					MathJax.typeset()
+  				}
+  			}
+		}
+
+
+		$(document).on('click','#btnVerifica',function(){	 //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript
+		if(!estaCalcula){
+  				$("#Paso_5").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
+  				const lblInputN="<div class=\"form-group row\"\> \<label for=\"inputN\" class=\"col-6 col-form-label text-right\" >  N \\(    \\gt \\) \</label> ";  				
+				const inputN="\<input type=\"number\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" value=\"0\" max=\"20\" min=\"0\" step=\"1\">    <\/div>"  								
+  				$("#Paso_6").append(lblInputN+inputN);
+  				estaCalcula=true;
+  				MathJax.typeset()
+  			}   
+		});	
+
+		$(document).on('change','#inputVerificaEpsilon',function(){
+			
+			
+
+		});	
+		
+/*  		$(document).on('change','#inputVerificaEpsilon',function(){	 //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript		
+  			if(!estaCalcula){
+  				$("#Paso_5").text(" Calcula un valor de N que satisfaga la definición de límite para la épsilon elegida");  			
+  				const lblInputN="<div class=\"form-group row\"\> \<label for=\"inputN\" class=\"col-6 col-form-label text-right\" >  N \\(    \\gt \\) \</label> ";
+  				const inputN="\<input type=\"text\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" placeholder=\"\" <\/div>"
+				//const inputN="\<input type=\"text\" class=\"form-control w-25 mx-0 px-0\" id=\"inputVerificaEpsilon\" placeholder=\"\">    <\/div>"  								
+  				$("#Paso_6").append(lblInputN+inputN);
+  				estaCalcula=true;
   				MathJax.typeset()
   			}       		
 
-		});    
-
-  			
-
-		
+		});  */  
 
 
-
-		$("#sliderD").bind( "change", function(event, ui) {  		  		
-		
-			
-			board.update();	
-			
+		$("#sliderD").bind( "change", function(event, ui) {  		  				
+			board.update();		
 		});
 
-
-		
+        document.getElementById("myForm").onkeypress = function(e) {
+          var key = e.charCode || e.keyCode || 0;     
+          if (key == 13) {
+   			cambiaEpsilon($( "#inputEpsilon" ).val());
+            e.preventDefault();
+          }
+        } 
+                      
 		
 
 
