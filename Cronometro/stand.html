@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cronómetro Preguntas</title>
+		<script src="js/jquery-1.10.2.js"></script>
+		<script src="js/crono3.js"></script>
+	</head>
+	
+	<style type="text/css">
+
+	#contenedor{
+		margin: 10px auto;
+		width: 800px;
+		height: 500px;
+	}
+	.reloj{
+		float: left;
+		font-size: 160px;
+		font-family: Courier,sans-serif;
+		color: #363431;
+	}
+	.boton{
+		outline: none;
+		border: 1px solid #363431;
+		color: white;
+		width: 128px;
+		height: 30px;
+		text-shadow: 0px -1px 1px black;
+		font-size: 20px;
+		border-radius: 5px;
+		font-family: Helvetica;
+		cursor: pointer;
+		background-image: linear-gradient(#3aad02,#2c6f05);
+	}
+	.boton:active{
+		background-image: linear-gradient(#2c6f05,#3aad02);
+	}
+	.boton:hover{
+		box-shadow: 0px 0px 14px #3aad02;
+	}
+	.number:hover{
+		box-shadow: 0px 0px 14px #3aad02;
+	}	
+
+
+	</style>
+
+	<body style="background-color:#3aad02">
+		<div style="display:block;margin-left:auto;margin-right:auto;">
+			<div class="reloj" id="Horas">00</div>
+			<div class="reloj" id="Minutos">:00</div>
+			<div class="reloj" id="Segundos">:00</div>
+			
+			
+			<!-- <div class="reloj" id="Centesimas">:00</div> -->			
+		</div>
+
+		
+		<div id="flag" style="height: 600px">
+			
+			
+		</div>
+		<div>
+			<p>Preguntas</p>
+			<input type="button" class="boton" id="inicio" value="Empezar &#9658;" onclick="inicio();">
+			<input type="button" class="boton" id="parar" value="Parar &#8718;" onclick="parar();" disabled>
+			<input type="button" class="boton" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
+			<input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>			
+			
+		</div>
+
+	</body>
+
+
+
+
+
+</html>
