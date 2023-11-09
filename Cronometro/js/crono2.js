@@ -3,8 +3,8 @@
 	var segundos = 0;
 	var minutos = 0;
 	var horas = 0;
-	var limite_1=5;
-	var limite_2=8;
+	var limite_1=4;
+	var limite_2=7;
 	
 	
 	
