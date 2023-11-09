@@ -7,20 +7,37 @@
 	var limite_2=0;
 	var limite_3=0;
 
+	
+	function inicioP(){
+		limite_1=4;
+		limite_2=7;
+		$('#lblModo').text("Preguntas ");
+		inicio();
+	}
+
+	function inicioE(){
+		limite_1=5;
+		limite_2=8;
+		$('#lblModo').text("Exposicion ");
+		inicio();
+	}
+	
 	function inicio () {
-		limite_1=$("#minuto_1").val()*1;
-		limite_2=$("#minuto_2").val()*1;
-		limite_3=$("#minuto_3").val()*1;
+				
 		console.log(limite_1);
 		console.log(limite_2);
-		console.log(limite_3);
+		
 
 		control = setInterval(cronometro,10);
 		document.getElementById("inicio").disabled = true;
 		document.getElementById("parar").disabled = false;
 		document.getElementById("continuar").disabled = true;
 		document.getElementById("reinicio").disabled = false;
+		
+		$('#lblLimite1').text("Aviso 1: "+limite_1 );
+		$('#lblLimite2').text("Aviso 2: "+limite_2 );
 	}
+	
 	function parar () {
 		clearInterval(control);
 		document.getElementById("parar").disabled = true;
@@ -32,7 +49,7 @@
 		segundos = 0;
 		minutos = 0;
 		horas = 0;
-		Centesimas.innerHTML = ":00";
+		//Centesimas.innerHTML = ":00";
 		Segundos.innerHTML = ":00";
 		Minutos.innerHTML = ":00";
 		Horas.innerHTML = "00";
@@ -45,7 +62,7 @@
 		if (centesimas < 99) {
 			centesimas++;
 			if (centesimas < 10) { centesimas = "0"+centesimas }
-			Centesimas.innerHTML = ":"+centesimas;
+			//Centesimas.innerHTML = ":"+centesimas;
 		}
 		if (centesimas == 99) {
 			centesimas = -1;
@@ -59,22 +76,9 @@
 			segundos = -1;
 		}
 
-		if (minutos < limite_1) {
-			$('#flag').css('background',"#229954");
-		}else if (minutos < limite_2) {
-				$('#flag').css('background',"#F1C40F");
-				} else	if (minutos <limite_3) {
-					$('#flag').css('background',"#CB4335");
-				}
-
-/*		if (segundos < 10) {
-			$('#flag').css('background',"#229954");
-		}else if (segundos < 20) {
-				$('#flag').css('background',"#F1C40F");
-				} else	if (segundos <25) {
-					$('#flag').css('background',"#CB4335");
-				}*/
-
+		if(minutos<limite_1){$('#flag').css('background',"#3aad02");}
+		if(minutos>=limite_1 && minutos<limite_2){$('#flag').css('background',"#F1C40F");}
+		if(minutos>=limite_2){$('#flag').css('background',"#CB4335");}
 
 		if ( (centesimas == 0)&&(segundos == 0) ) {
 			minutos++;

@@ -43,26 +43,34 @@
 		box-shadow: 0px 0px 14px #3aad02;
 	}	
 
+
 	</style>
 
-	<body>
+	<body style="background-color:#3aad02">
 		<div style="display:block;margin-left:auto;margin-right:auto;">
 			<div class="reloj" id="Horas">00</div>
 			<div class="reloj" id="Minutos">:00</div>
 			<div class="reloj" id="Segundos">:00</div>
-			<div class="reloj" id="Centesimas">:00</div>			
+			
+			
+			<!-- <div class="reloj" id="Centesimas">:00</div> -->			
 		</div>
 
-		<div id="flag" style="height: 600px"></div>
-
+		
+		<div id="flag" style="height: 600px">
+			
+			
+		</div>
 		<div>
-			<input type="button" class="boton" id="inicio" value="Empezar &#9658;" onclick="inicio();">
+			<label id="lblModo" style="font-size: 40px; margin-left: auto;">Exposicion</label>
+			<label id="lblLimite1" style="font-size: 40px; margin-left: auto"> Aviso 1:</label>
+			<label id="lblLimite2" style="font-size: 40px; margin-left: auto"> Aviso 2:</label>
+			<input type="button" class="boton" id="inicio" value="Empezar Exposicion &#9658;" onclick="inicioE();">
+			<input type="button" class="boton" id="inicio" value="Empezar Preguntas &#9658;" onclick="inicioP();">
 			<input type="button" class="boton" id="parar" value="Parar &#8718;" onclick="parar();" disabled>
 			<input type="button" class="boton" id="continuar" value="Resumir &#8634;" onclick="inicio();" disabled>
-			<input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>
-			<label for="movie">Aviso 1: </label><input id="minuto_1" type="number" min= "0" value="2"/>
-			<label for="movie">Aviso 2: </label><input id="minuto_2" type="number" min= "0" value="5"/>
-			<label for="movie">Aviso 3: </label><input id="minuto_3" type="number" min= "0" value="10"/>
+			<input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>			
+			
 		</div>
 
 	</body>
